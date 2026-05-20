@@ -51,6 +51,32 @@ Instead of guessing, we used **General Relativity** and **Quantum Mechanics** as
 
 ---
 
+## 普朗克常數的微觀意義 | Microscopic meaning of Planck constant
+
+從能量子的振動（頻率 ν₀ ~ c/σ）和固有能量 ε₀ 可得：
+
+**ε₀ / ν₀ = ħ**  （約化普朗克常數）
+
+因此普朗克常數 **h = 2π ħ** 是能量子網絡的 **最小作用量單位**：一個能量子完成一次完整振動所交換的能量×時間。詳細推導參見 `docs/derivation_of_planck_constant.md`。
+
+---
+
+## 薛定諤方程的湧現 | Emergence of Schrödinger equation
+
+物質團簇（粒子）在能量子網絡中運動時，其集體激發模式的振幅滿足一個波動方程。在長波、低能極限下，該方程退化為薛定諤方程：
+
+\[
+i\hbar \frac{\partial \psi}{\partial t} = -\frac{\hbar^2}{2m} \nabla^2 \psi + V \psi
+\]
+
+- **動能項** 來自網絡的離散性與推擠躍遷的二次色散關係。
+- **位能項 V** 來自網絡的變形（引力勢）或其它團簇的擾動。
+- **質量 m** 由團簇所含能量子數 N 決定：\( m = N \varepsilon_0 / c^2 \)。
+
+這是一個湧現式推導綱領，嚴格的數學證明尚待完成。參見 `docs/emergence_of_schrodinger_equation.md`。
+
+---
+
 ## 數值模擬驗證 | Numerical simulation
 
 我們用 Python 寫了一個靜態幾何模擬，驗證兩個團簇之間的有效力是否遵循 **1/R²** 關係。  
@@ -74,7 +100,8 @@ Instead of guessing, we used **General Relativity** and **Quantum Mechanics** as
 | 霍金溫度 | T = ℏ c³ / (8π k_B G M) | 網絡基模振動能量 ~ ℏ c / R | ✅ 大致吻合（差 4π） |
 | 引力波速度 | v_g = c（LIGO 確認） | 橫波與縱波速度均為 c，要求拉梅常數 λ = -μ | 🔶 新預測 |
 | 宇宙常數 | 極小（暗能量） | 零點能量巨大 → 需對稱性抵消 | ❌ 共同難題 |
-| **力與距離關係** | 牛頓引力 F ∝ 1/R² | 靜態幾何模擬顯示 F ∝ 1/R² | ✅ **已驗證** |
+| 力與距離關係 | 牛頓引力 F ∝ 1/R² | 靜態幾何模擬顯示 F ∝ 1/R² | ✅ 已驗證 |
+| 普朗克常數 | h = 6.626×10⁻³⁴ J·s | h = 2π ε₀ σ / c，代入 ε₀, σ 自洽 | ✅ 自洽 |
 
 ---
 
@@ -84,9 +111,9 @@ Instead of guessing, we used **General Relativity** and **Quantum Mechanics** as
 
 - 從微觀推擠規則，能否嚴格推導出牛頓引力 F = G m₁ m₂ / R²？
 - 能否推導出愛因斯坦場方程作為網絡的連續極限？
+- 能否嚴格推導出薛定諤方程（從離散隨機過程或路徑積分）？
 - 網絡的「零點振動」如何與量子場論的真空漲落對應？
-- ✅ ~~能否寫一個離散模擬，驗證兩個團簇之間的確出現 1/R² 有效引力？~~ **已完成（靜態幾何近似）**  
-  下一步：動態分子動力學模擬，讓能量子隨機運動並自然湧現出 1/R² 力。
+- 下一步：動態分子動力學模擬，讓能量子隨機運動並自然湧現出 1/R² 力。
 
 你可以用任何方式參與：
 - 寫數學推導
@@ -106,10 +133,19 @@ Instead of guessing, we used **General Relativity** and **Quantum Mechanics** as
 
 ---
 
+## 參考文獻（相關思想淵源）| References
+
+- Feynman, R. P. (1948). Space-Time Approach to Non-Relativistic Quantum Mechanics. *Rev. Mod. Phys.*, 20, 367.
+- Nelson, E. (1966). Derivation of the Schrödinger Equation from Newtonian Mechanics. *Phys. Rev.*, 150, 1079.
+- 't Hooft, G. (2016). *The Cellular Automaton Interpretation of Quantum Mechanics*. Springer.
+
+---
+
 ## 如何開始 | How to start
 
 - 先讀這份 README，你已經在讀了。
 - 執行 `app.py` 產生力與距離關係圖。
+- 查看 `docs/` 資料夾中的詳細推導筆記。
 - 歡迎開 Issue 提問或建議。
 - 如果你有數學或程式貢獻，請 Pull Request。
 
