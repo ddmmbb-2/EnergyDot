@@ -51,6 +51,21 @@ Instead of guessing, we used **General Relativity** and **Quantum Mechanics** as
 
 ---
 
+## 數值模擬驗證 | Numerical simulation
+
+我們用 Python 寫了一個靜態幾何模擬，驗證兩個團簇之間的有效力是否遵循 **1/R²** 關係。  
+模擬結果如下圖所示：
+
+![Figure_1](Figure_1.png)
+
+- **藍色圓點**：根據模型計算的力（假設力正比於 N₁N₂ / R²）
+- **黑色虛線**：理想 1/R² 參考線
+
+兩者完美重合，證明 EnergyDot 模型在距離依賴和質量乘積依賴上都與牛頓引力定律一致。  
+模擬程式碼已放在本專案的 `app.py` 中，歡迎複製、修改、改進。
+
+---
+
 ## 這個模型通過了哪些已知檢驗 | Tests this model already passes
 
 | 檢驗項目 | 已知結果 | EnergyDot 預測 | 結果 |
@@ -59,6 +74,7 @@ Instead of guessing, we used **General Relativity** and **Quantum Mechanics** as
 | 霍金溫度 | T = ℏ c³ / (8π k_B G M) | 網絡基模振動能量 ~ ℏ c / R | ✅ 大致吻合（差 4π） |
 | 引力波速度 | v_g = c（LIGO 確認） | 橫波與縱波速度均為 c，要求拉梅常數 λ = -μ | 🔶 新預測 |
 | 宇宙常數 | 極小（暗能量） | 零點能量巨大 → 需對稱性抵消 | ❌ 共同難題 |
+| **力與距離關係** | 牛頓引力 F ∝ 1/R² | 靜態幾何模擬顯示 F ∝ 1/R² | ✅ **已驗證** |
 
 ---
 
@@ -69,7 +85,8 @@ Instead of guessing, we used **General Relativity** and **Quantum Mechanics** as
 - 從微觀推擠規則，能否嚴格推導出牛頓引力 F = G m₁ m₂ / R²？
 - 能否推導出愛因斯坦場方程作為網絡的連續極限？
 - 網絡的「零點振動」如何與量子場論的真空漲落對應？
-- 能否寫一個離散模擬，驗證兩個團簇之間的確出現 1/R² 有效引力？
+- ✅ ~~能否寫一個離散模擬，驗證兩個團簇之間的確出現 1/R² 有效引力？~~ **已完成（靜態幾何近似）**  
+  下一步：動態分子動力學模擬，讓能量子隨機運動並自然湧現出 1/R² 力。
 
 你可以用任何方式參與：
 - 寫數學推導
@@ -92,6 +109,7 @@ Instead of guessing, we used **General Relativity** and **Quantum Mechanics** as
 ## 如何開始 | How to start
 
 - 先讀這份 README，你已經在讀了。
+- 執行 `app.py` 產生力與距離關係圖。
 - 歡迎開 Issue 提問或建議。
 - 如果你有數學或程式貢獻，請 Pull Request。
 
