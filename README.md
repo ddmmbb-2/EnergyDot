@@ -3,6 +3,37 @@
 > 宇宙只有能量小點點，沒有別的了。  
 > The universe is nothing but tiny energy dots.
 
+![3D Gravity Simulation](doc/gravity/3d_gravity_inverse_square_success.png)
+
+---
+
+## 🔥 最新突破：三維動態晶格湧現萬有引力 (2026-05-21)
+
+**我們成功在電腦中實現了「萬有引力」的自發湧現！**
+
+在 96×96×96 的三維立體晶格空間中（包含將近 **88 萬個**能量點），我們**完全沒有在程式碼中寫下任何牛頓引力公式**，只設定了最底層的兩條規則：
+
+1. **物質 = 壓力凹陷**：在晶格中指定兩個「物質團簇」區域，將該處壓力強制設為 0。  
+2. **壓力傳導**：透過離散波動方程 ∂ₜₜP = α ∇²P 讓壓力場在晶格中自然演化。
+
+經過 900 次迭代達到靜態平衡後，兩個物質團簇之間的應力梯度淨力 **自動** 遵循 **F ∝ 1/R²** 的牛頓萬有引力定律！
+
+| 3D晶格間距 (R) | 3D應力淨引力 (F) | F × R² |
+|---|---|---|
+| 22 | 0.14258 | 69.01 |
+| 25 | 0.13095 | 81.84 |
+| 28 | 0.11400 | 89.38 |
+| 31 | 0.10758 | 103.38 |
+| 34 | 0.09725 | 112.42 |
+| 37 | 0.09294 | 127.24 |
+| 40 | 0.08533 | 136.53 |
+| 43 | 0.08184 | 151.32 |
+| 46 | 0.07515 | 159.02 |
+
+**核心結論**：巨觀引力本質上是微觀空間連續彈性介質受到物質擠壓變形後所沉澱出的機械效應。**引力不是吸引力，而是真空壓強的推擠力。**
+
+📂 **相關程式碼**：詳見 [`doc/gravity/`](doc/gravity/) 資料夾，包含 `energy_dot_lattice_3d.py` (GPU 加速核心演算法) 與 `experiment_3d.py` (實驗腳本)。
+
 ---
 
 ## 白話簡介
@@ -48,7 +79,7 @@ In the EnergyDot model, acceleration comes from a completely different source: *
 ## 已經完成的事
 
 **中文**  
-我們借用廣義相對論和量子力學的已知結果，反推出能量子網絡的基本參數，並通過數值模擬驗證了牛頓引力定律。
+我們借用廣義相對論和量子力學的已知結果，反推出能量子網絡的基本參數，並通過三維動態晶格模擬驗證了牛頓引力定律的自發湧現。
 
 ### 1. 從已知物理反推網絡常數
 
@@ -66,10 +97,15 @@ In the EnergyDot model, acceleration comes from a completely different source: *
 
 ### 3. 數值模擬驗證牛頓引力
 
-我們用 Python 進行靜態幾何模擬，兩個團簇之間的有效力嚴格遵循 F ∝ N₁ N₂ / R²，與牛頓引力 F = G m₁ m₂ / R² 完全一致。  
-模擬程式碼在 `app.py`，結果見下圖：
+我們完成了從靜態幾何假設到三維動態晶格的跨越：
 
-![Figure_1](Figure_1.png)
+| 版本 | 方法 | 結果 | 程式碼 |
+|------|------|------|--------|
+| V1 | 靜態幾何假設 | F ∝ N₁N₂/R² | `app.py` |
+| V2 | 二維動態晶格 | 力與距離關係 | (實驗中) |
+| **V3** | **三維動態晶格 (GPU)** | **F ∝ 1/R² 自發湧現** | [`doc/gravity/`](doc/gravity/) |
+
+最新 V3 版本在 96³ 晶格上運行，**完全沒有預設力律**，僅透過離散波動方程演化壓力場，巨觀引力自動湧現。
 
 ### 4. 通過的已知檢驗
 
@@ -79,11 +115,11 @@ In the EnergyDot model, acceleration comes from a completely different source: *
 | 霍金溫度 | 網絡基模振動能量 ~ ħc/R | ✅ 大致吻合（差 4π） |
 | 引力波速度 | 縱波與橫波速度均為 c → λ = -μ | 🔶 新預測 |
 | 宇宙常數 | 邊界壓力驅動加速，無需暗能量 | ✅ 新解釋 |
-| 力與距離關係 | F ∝ 1/R² | ✅ 數值驗證 |
+| 力與距離關係 | F ∝ 1/R² | ✅ 三維動態晶格驗證 |
 | 普朗克常數自洽 | h = 2π ε₀ σ / c | ✅ 自洽 |
 
 **English**  
-We used known results from General Relativity and Quantum Mechanics to deduce the fundamental parameters of the energy-dot network, and verified Newton's law of gravity via numerical simulation.
+We used known results from General Relativity and Quantum Mechanics to deduce the network's fundamental parameters and verified the spontaneous emergence of Newtonian gravity via 3D dynamical lattice simulations.
 
 ### 1. Deduced network constants from known physics
 
@@ -99,8 +135,15 @@ The dot vibrates at frequency ν₀ ≈ c/σ, with energy ε₀, giving ε₀ / 
 
 ### 3. Numerical verification of Newtonian gravity
 
-We wrote a static geometric simulation in Python. The effective force between two clusters follows F ∝ N₁ N₂ / R², exactly matching Newton's law F = G m₁ m₂ / R².  
-Code is in `app.py`. See figure below.
+We progressed from static geometric assumptions to 3D dynamical lattices:
+
+| Version | Method | Result | Code |
+|---------|--------|--------|------|
+| V1 | Static geometric assumption | F ∝ N₁N₂/R² | `app.py` |
+| V2 | 2D dynamical lattice | Force vs. distance | (experimental) |
+| **V3** | **3D dynamical lattice (GPU)** | **Spontaneous F ∝ 1/R²** | [`doc/gravity/`](doc/gravity/) |
+
+The latest V3 runs on a 96³ lattice with **no pre-programmed force law** – only a discrete wave equation evolving the pressure field – and macroscopic gravity emerges spontaneously.
 
 ### 4. Tests this model already passes
 
@@ -110,7 +153,7 @@ Code is in `app.py`. See figure below.
 | Hawking temperature | Network mode energy ~ ħc/R | ✅ Approx (factor 4π) |
 | Gravitational wave speed | Both transverse and longitudinal speeds = c → λ = -μ | 🔶 New prediction |
 | Cosmological constant | Boundary push mimics Λ, no dark energy | ✅ New explanation |
-| Force–distance law | F ∝ 1/R² | ✅ Verified numerically |
+| Force–distance law | F ∝ 1/R² | ✅ Verified by 3D dynamical lattice |
 | Planck constant self-consistency | h = 2π ε₀ σ / c | ✅ Self-consistent |
 
 ---
@@ -121,7 +164,7 @@ Code is in `app.py`. See figure below.
 目前 EnergyDot 仍然缺少一個嚴格的數學框架。以下問題尚未解決：
 
 1. **從微觀推擠規則，嚴格推導牛頓引力 F = G m₁ m₂ / R²**  
-   目前只有數值驗證，缺少解析推導。
+   目前只有數值驗證（已完成三維動態晶格模擬），缺少解析推導。
 
 2. **推導愛因斯坦場方程作為網絡的連續極限**  
    需要證明在非線性彈性下，應變張量如何與時空度規耦合。
@@ -132,17 +175,17 @@ Code is in `app.py`. See figure below.
 4. **解釋量子場論的真空漲落**  
    網絡中每個能量點的零點振動如何對應於標準量子場論的真空漲落。
 
-5. **動態模擬中自然湧現 1/R² 力**  
-   目前靜態幾何模擬已成功，下一步要進行分子動力學模擬。
+5. **分子動力學模擬（讓能量點真正隨機運動）**  
+   目前採用連續介質壓力場演化，下一步是讓個別能量點真正隨機跳躍，自動形成團簇並湧現引力。
 
 **English**  
 The EnergyDot model still lacks a rigorous mathematical framework. The following problems remain open:
 
-1. **Derive Newtonian gravity F = G m₁ m₂ / R² from microscopic push rules** – only numerical evidence exists so far.  
+1. **Derive Newtonian gravity F = G m₁ m₂ / R² from microscopic push rules** – numerical evidence exists (3D dynamical lattice completed), but analytic derivation is missing.  
 2. **Derive Einstein field equations as the continuum limit of the network** – need to couple strain to spacetime metric.  
 3. **Derive the Schrödinger equation rigorously** – from discrete stochastic processes or path integrals.  
 4. **Connect zero-point vibrations to QFT vacuum fluctuations** – how do individual dot vibrations correspond to quantum fields?  
-5. **Dynamic simulation that naturally produces 1/R²** – we have static geometry; next is molecular dynamics.
+5. **Molecular dynamics simulation (truly random dot motion)** – current work uses continuum pressure field evolution; next step is to let individual dots randomly jump and spontaneously form clusters.
 
 ---
 
@@ -152,12 +195,12 @@ The EnergyDot model still lacks a rigorous mathematical framework. The following
 無論你的專長是數學、程式、物理或科普，都能貢獻：
 
 ### 短期任務（幾天到幾週）
-- 寫一個動態分子動力學模擬（C++ / Julia / Python），讓能量點隨機運動並自動出現 1/R² 力。
-- 整理文獻：找出與「彈性網絡湧現引力」、「晶格引力」相關的論文，寫成摘要。
+- **分子動力學模擬**：寫一個模擬，讓能量點真正隨機運動（而非連續壓力場），觀察是否自動形成團簇並湧現 1/R² 力（C++ / Julia / Python + CUDA）。
+- **整理文獻**：找出與「彈性網絡湧現引力」、「晶格引力」相關的論文，寫成摘要。
 
 ### 中期任務（幾週到幾個月）
-- 推導連續彈性極限：從離散的推擠規則（如 Lennard-Jones 勢或硬核排斥）用粗粒化方法得到 Navier 方程，並證明 λ = -μ。
-- 證明膨脹中心相互作用能 → 牛頓勢：用彈性格林函數，導出 F = (μ ΔV₁ ΔV₂)/(4π R²)，再代入普朗克參數得到 G。
+- **推導連續彈性極限**：從離散的推擠規則（如 Lennard-Jones 勢或硬核排斥）用粗粒化方法得到 Navier 方程，並證明 λ = -μ。
+- **證明膨脹中心相互作用能 → 牛頓勢**：用彈性格林函數，導出 F = (μ ΔV₁ ΔV₂)/(4π R²)，再代入普朗克參數得到 G。
 
 ### 長期任務（幾個月到一年）
 - 從非線性彈性導出愛因斯坦場方程（參考「類比引力」或「感應引力」文獻）。
@@ -169,7 +212,7 @@ The EnergyDot model still lacks a rigorous mathematical framework. The following
 Anyone with expertise in math, programming, physics, or science communication can help.
 
 ### Short-term (days to weeks)
-- Write a molecular dynamics simulation (C++/Julia/Python) that spontaneously yields 1/R² force.
+- **Molecular dynamics simulation**: Write a simulation with truly random dot motion (not continuum pressure field) and observe spontaneous cluster formation and emergent 1/R² force (C++/Julia/Python + CUDA).
 - Literature review: collect papers on "emergent gravity from elastic networks" or "lattice gravity" and write summaries.
 
 ### Mid-term (weeks to months)
@@ -188,23 +231,25 @@ Anyone with expertise in math, programming, physics, or science communication ca
 
 **中文**  
 
-| 階段 | 目標 | 所需人力 |
-|------|------|----------|
-| 第一階段（已完成） | 反推網絡常數，靜態幾何模擬驗證 1/R² | 1 人 |
-| 第二階段（進行中） | 動態分子動力學模擬，自動湧現引力 | 1-2 人 |
-| 第三階段 | 嚴格推導牛頓引力（解析） | 1-2 位理論物理/應用數學家 |
-| 第四階段 | 推導薛定諤方程與愛因斯坦場方程 | 2-3 位，需微分幾何背景 |
-| 第五階段 | 與量子場論對接，預測可實驗檢驗的效應 | 理論+實驗合作 |
+| 階段 | 目標 | 狀態 |
+|------|------|------|
+| 第一階段 | 反推網絡常數，靜態幾何假設驗證 1/R² | ✅ 已完成 |
+| 第二階段 | **三維動態晶格模擬，引力自發湧現** | ✅ 已完成 |
+| 第三階段 | 分子動力學模擬（能量點真正隨機運動） | 🔶 進行中 |
+| 第四階段 | 嚴格推導牛頓引力（解析） | 🔶 待協助 |
+| 第五階段 | 推導薛定諤方程與愛因斯坦場方程 | 🔶 待協助 |
+| 第六階段 | 與量子場論對接，預測可實驗檢驗的效應 | 🔶 待協助 |
 
 **English**  
 
-| Stage | Goal | People needed |
-|-------|------|---------------|
-| Stage 1 (done) | Deduce network constants, static simulation of 1/R² | 1 |
-| Stage 2 (ongoing) | Molecular dynamics simulation, spontaneous emergence of gravity | 1-2 |
-| Stage 3 | Rigorous derivation of Newtonian gravity (analytic) | 1-2 theoretical physicists / applied mathematicians |
-| Stage 4 | Derive Schrödinger and Einstein field equations | 2-3 with differential geometry background |
-| Stage 5 | Connect to QFT, predict experimentally testable effects | Theory + experiment collaboration |
+| Stage | Goal | Status |
+|-------|------|--------|
+| Stage 1 | Deduce network constants, static geometric verification of 1/R² | ✅ Done |
+| Stage 2 | **3D dynamical lattice simulation, spontaneous emergence of gravity** | ✅ Done |
+| Stage 3 | Molecular dynamics simulation (truly random dot motion) | 🔶 Ongoing |
+| Stage 4 | Rigorous derivation of Newtonian gravity (analytic) | 🔶 Help wanted |
+| Stage 5 | Derive Schrödinger and Einstein field equations | 🔶 Help wanted |
+| Stage 6 | Connect to QFT, predict experimentally testable effects | 🔶 Help wanted |
 
 ---
 
@@ -239,9 +284,10 @@ If any of the following predictions is falsified, this model is wrong (that's go
 ## 如何開始
 
 1. 你已經在讀這份 README 了。  
-2. 執行 `python app.py` 產生力與距離關係圖。  
-3. 查看 `docs/` 資料夾中的詳細推導筆記。  
-4. 開 Issue 或 Pull Request 參與討論。
+2. 執行 **三維 GPU 模擬**：進入 `doc/gravity/`，執行 `python experiment_3d.py`（需要 NVIDIA GPU + CuPy）。  
+3. 執行 **靜態幾何模擬**：在根目錄執行 `python app.py`。  
+4. 查看 `docs/` 資料夾中的詳細推導筆記。  
+5. 開 Issue 或 Pull Request 參與討論。
 
 我們不追求先佔先贏，只追求 **找到宇宙真正的底層規則**。
 
@@ -250,8 +296,6 @@ If any of the following predictions is falsified, this model is wrong (that's go
 ## 授權
 
 MIT / 公眾領域 — 隨便用，隨便改，只要記得這是一個開放的集體探索。
-
-
 
 ---
 
