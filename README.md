@@ -21,6 +21,30 @@ The propagation speed of "pushes" between dots is the **speed of light**. Light 
 
 ---
 
+## 宇宙膨脹的新解釋：不需要暗能量 | A new explanation for cosmic expansion: no dark energy needed
+
+**中文**  
+標準宇宙學模型（ΛCDM）認為宇宙晚期的加速膨脹來自一種神秘的「暗能量」，其物理本質完全未知。  
+在 EnergyDot 模型中，加速膨脹有完全不同的來源：**宇宙邊界**。  
+
+- 宇宙是有限的，能量點網絡所及之處就是宇宙，邊界之外是絕對的虛無。  
+- 邊界處的能量點因外側沒有鄰居，受到向外的淨推力（壓力梯度）。  
+- 當宇宙變得很大時，這個邊界推力趨於常數，宏觀上等效於一個宇宙常數 \( \Lambda \)，產生加速膨脹。  
+
+**因此，EnergyDot 模型不需要暗能量**——觀測到的加速膨脹只是宇宙存在邊界的自然結果。
+
+**English**  
+In standard cosmology (ΛCDM), the late-time acceleration is attributed to "dark energy" – a mysterious component with no known physical origin.  
+In the EnergyDot model, acceleration comes from a completely different source: **the cosmic boundary**.  
+
+- The universe is finite. Where the energy-dot network ends is the boundary; beyond that is absolute nothingness.  
+- Dots at the boundary experience a net outward push due to missing neighbors (pressure gradient).  
+- When the universe becomes very large, this boundary push tends to a constant, which macroscopically mimics a cosmological constant \( \Lambda \), driving accelerated expansion.  
+
+**Thus, the EnergyDot model needs no dark energy** – the observed acceleration is just a natural consequence of having a boundary.
+
+---
+
 ## 我們從已知物理反推了什麼 | What we derived from known physics
 
 我們沒有憑空猜測，而是直接借用 **愛因斯坦廣義相對論** 和 **量子力學** 的已知結果，反推出能量子網絡必須有的性質。
@@ -99,7 +123,7 @@ i\hbar \frac{\partial \psi}{\partial t} = -\frac{\hbar^2}{2m} \nabla^2 \psi + V 
 | 黑洞熵 | S = k_B A / (4 ℓ_P²) | 網絡節點數 ~ A / σ²，且 σ = ℓ_P | ✅ 吻合 |
 | 霍金溫度 | T = ℏ c³ / (8π k_B G M) | 網絡基模振動能量 ~ ℏ c / R | ✅ 大致吻合（差 4π） |
 | 引力波速度 | v_g = c（LIGO 確認） | 橫波與縱波速度均為 c，要求拉梅常數 λ = -μ | 🔶 新預測 |
-| 宇宙常數 | 極小（暗能量） | 零點能量巨大 → 需對稱性抵消 | ❌ 共同難題 |
+| 宇宙常數 | 極小（暗能量） | **邊界壓力驅動加速，無需暗能量** | ✅ 新解釋 |
 | 力與距離關係 | 牛頓引力 F ∝ 1/R² | 靜態幾何模擬顯示 F ∝ 1/R² | ✅ 已驗證 |
 | 普朗克常數 | h = 6.626×10⁻³⁴ J·s | h = 2π ε₀ σ / c，代入 ε₀, σ 自洽 | ✅ 自洽 |
 
@@ -130,6 +154,7 @@ i\hbar \frac{\partial \psi}{\partial t} = -\frac{\hbar^2}{2m} \nabla^2 \psi + V 
 1. 引力波與光波的速度比永遠精確等於 1（誤差小於 10⁻²⁰ 才算真正通過）。
 2. 在普朗克能量尺度下，光速會有可測量的微小變化（洛倫茲不變性破缺）。
 3. 真空在高能光子對撞下會表現出「彈性」非線性效應，不同於標準量子電動力學的預測。
+4. （新增）如果未來觀測明確顯示宇宙邊界距離可觀測宇宙僅數倍，則晚期哈勃參數會出現與 ΛCDM 不同的偏差——若未見偏差，則邊界必須極遠。
 
 ---
 
