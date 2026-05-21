@@ -251,6 +251,8 @@ If any of the following predictions is falsified, this model is wrong (that's go
 
 MIT / 公眾領域 — 隨便用，隨便改，只要記得這是一個開放的集體探索。
 
+
+
 ---
 
 **EnergyDot – Let’s push the universe.**  
