@@ -1,0 +1,3 @@
+Experiment: 實驗 B：電子自旋與角動量
+Steps: 200
+Spin Value: 0.5

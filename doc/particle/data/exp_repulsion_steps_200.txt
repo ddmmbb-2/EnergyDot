@@ -1,0 +1,3 @@
+Experiment: 實驗 A：雙電子同性排斥
+Steps: 200
+Spin Value: 0.5

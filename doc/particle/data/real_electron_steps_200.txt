@@ -1,0 +1,4 @@
+Experiment: Real Physical Electron Mapping
+Steps: 200
+Lattice Size: 128x128x128
+Mapping Target: Classical Electron Radius (2.82e-15m) -> 5.0 Grid Points

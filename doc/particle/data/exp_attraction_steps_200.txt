@@ -1,0 +1,3 @@
+Experiment: 實驗 A：正負電子異性吸引
+Steps: 200
+Spin Value: 0.5
