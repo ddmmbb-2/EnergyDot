@@ -47,15 +47,19 @@ When a cluster suddenly disappears, the dip rebounds, sending out ripples — **
 
 For a static cluster, the depth of the dip (radius) is linearly related to the stored elastic energy: that's **$E = mc^2$** — mass is simply frozen energy.
 
+
+
 ---
 
 ## 🌌 宇宙膨脹的幾何解釋：或許不需要暗能量
 
-標準宇宙學模型（$\Lambda\text{CDM}$）認為宇宙晚期的加速膨脹來自一種神秘的「暗能量」。但在 EnergyDot 玩具模型中，加速膨脹可以有一個非常樸素的力學來源：**宇宙邊界**。
+標準宇宙學模型（ΛCDM）認為宇宙晚期的加速膨脹來自一種神秘的「暗能量」。但在 EnergyDot 玩具模型中，加速膨脹可以有一個非常樸素的力學來源：**宇宙邊界**。
 
 * 如果能量點網絡（宇宙）是有限的，邊界之外是絕對的虛無。
 * 邊界處的能量點因外側沒有鄰居，自然會受到向外的淨推力（壓力梯度）。
-* 當宇宙變得極大時，這個邊界推力趨於常數，在宏觀上等效於一個宇宙常數 $\Lambda$，從而驅動加速膨脹。這提供了一個無需引入未知實體的替代思考方向。
+* 當宇宙變得極大時，這個邊界推力趨於常數，在宏觀上等效於一個宇宙常數 Λ，從而驅動加速膨脹。這提供了一個無需引入未知實體的替代思考方向。
+
+
 
 ---
 
