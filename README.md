@@ -3,8 +3,6 @@
 > 宇宙只有能量小點點，沒有別的了。
 > The universe is nothing but tiny energy dots.
 
-
-
 ---
 
 ⚠️ **關於本專案 (About this Toy Model)**：
@@ -15,10 +13,9 @@
 
 * **晶格離散化限制 (Lattice Discretization)**：本模型依賴離散網格表現交互作用，這強行引入了「紫外線截斷（UV Cutoff）」，使得我們難以直接模擬連續空間中的量子糾纏與更深層的量子場論效應。
 * **非定域性挑戰**：晶格本質上是定域性（Locality）的鄰居交互系統，要從中湧現量子力學的非定域特徵（如 EPR 悖論）極具挑戰，目前本專案僅聚焦於經典場論的湧現。
-* **數值數值色散 (Numerical Dispersion)**：離散晶格可能產生數值上的雜訊，我們正透過高解析度計算與 GPU 並行加速來盡可能稀釋這些誤差。
+* **數值色散 (Numerical Dispersion)**：離散晶格可能產生數值上的雜訊，我們正透過高解析度計算與 GPU 並行加速來盡可能稀釋這些誤差。
 
 這是一場開放的科學探索，所有湧現出的物理結果（如 $G$ 常數閉環、$1/R^2$ 力律、星光偏折）均為初步數值觀察，結論仍需持續接受嚴格的理論審閱與科學檢驗。我們鼓勵社群共同審視這些侷限，並挑戰本模型的極限。
-
 
 ---
 
@@ -34,6 +31,11 @@
 在「質量正比於半徑（ $m \propto R$ ，非體積）」的修正洞察下，僅用三塊積木（空間推擠、空洞排開、質能等價），完整閉環推導出牛頓引力 $F \propto 1/R^2$。並從引力實驗中無參數湧現了極端硬稀狀態方程 $w = P_0 / \rho_E \approx 407$。
 📂 詳見：[`doc/gravity2/`]
 
+### 3. ⚛️ 粒子交互作用的幾何湧現（波動干涉取代古典受力）
+
+正式將底層引擎升級為包含慣性的「波動方程式」。不再預設庫侖定律等任何交互作用公式，僅透過粒子本身的幾何形變（純量排擠代表質量，徑向散度代表電荷，切向旋度代表自旋），成功在 3D 晶格中自發湧現出同性排斥（建設性干涉）與異性吸引（破壞性干涉）的動態應力場，證明了「沒有超距作用，只有波動推擠」。
+📂 詳見：[`particle/`]
+
 ---
 
 ## 📖 白話簡介 (Introduction)
@@ -48,7 +50,7 @@
 
 當團簇突然消失，凹陷回彈產生的漣漪就是 **重力波**，它以光速向外傳播。
 
-一個靜止團簇的凹陷深度（半徑）與其周圍儲存的彈性能量之間存在線性關係，這正是  $E = mc^2$  的微觀幾何起源——質量只是凍結的能量。
+一個靜止團簇的凹陷深度（半徑）與其周圍儲存的彈性能量之間存在線性關係，這正是 $E = mc^2$ 的微觀幾何起源——質量只是凍結的能量。
 
 **English** Imagine the universe is filled with tiny "energy dots". They have no mass, and can only **zero-point vibrate** in place.
 
@@ -62,8 +64,6 @@ When a cluster suddenly disappears, the dip rebounds, sending out ripples — **
 
 For a static cluster, the depth of the dip (radius) is linearly related to the stored elastic energy: that's **$E = mc^2$** — mass is simply frozen energy.
 
-
-
 ---
 
 ## 🌌 宇宙膨脹的幾何解釋：或許不需要暗能量
@@ -73,8 +73,6 @@ For a static cluster, the depth of the dip (radius) is linearly related to the s
 * 如果能量點網絡（宇宙）是有限的，邊界之外是絕對的虛無。
 * 邊界處的能量點因外側沒有鄰居，自然會受到向外的淨推力（壓力梯度）。
 * 當宇宙變得極大時，這個邊界推力趨於常數，在宏觀上等效於一個宇宙常數 Λ，從而驅動加速膨脹。這提供了一個無需引入未知實體的替代思考方向。
-
-
 
 ---
 
@@ -99,6 +97,12 @@ For a static cluster, the depth of the dip (radius) is linearly related to the s
 * **$1/r$ 弱場定律**：證明純量壓力場 $P(r)$ 的下降會調製局部推擠波速，完美形成 $\Delta \theta \propto 1/r$ 的光線偏折。
 * **廣義相對論 2x 幾何翻倍**：引入代表空間網格拉長的平方耦合後，實測偏折斜率精準達到單純時間膨脹效應的 **2.01 倍**。
 
+### 4. 粒子物理與微觀交互作用
+
+* **無超距作用力**：證明了「力」本質上是粒子幾何形變在彈性晶格中輻射出的「應力波」。
+* **電磁力幾何化**：同性電荷的散度場相撞產生建設性干涉（湧現排斥力）；異性電荷相位相反形成破壞性干涉暗帶，環境壓力自發將粒子推向彼此（湧現吸引力）。
+* **角動量幾何化**：透過渦旋向量場成功引入切向剪切應力，為自旋與量子場論建立微觀晶格基礎。
+
 ---
 
 ## 🗺️ 專案路線圖 (Roadmap)
@@ -111,12 +115,12 @@ For a static cluster, the depth of the dip (radius) is linearly related to the s
 | **第二階段** | **動力學對接**：三維動態晶格實現，湧現光速、引力波速、質能等價 $E=mc^2$。 | ✅ 已完成 |
 | **第三階段** | **相對論弱場**：完成解析推導，驗證引力常數 $G$、黑洞靜態彎曲與狀態方程 $w \approx 407$。 | ✅ 已完成 |
 | **第四階段** | **幾何透鏡效應**：成功重現 1919 年星光偏折，證實引力場的時間與空間雙重效應（2.01x 倍率）。 | ✅ 已完成 |
-| **第五階段** | **高階引力輻射**：引入雙星互繞系統，目標從晶格應變中提取「連續四極矩重力波」波形。 | 🔶 進行中 |
-| **第六階段** | **非線性彈性極限**：探討非線性推擠規則對引力修正的影響，並嘗試向愛因斯坦場方程收斂。 | 📋 規劃中 |
-| **第七階段** | **邊界條件與宇宙學**：深入研究有限邊界對宇宙加速膨脹的貢獻，替代暗能量模型。 | 📋 規劃中 |
+| **第五階段** | **波動力學與微觀粒子**：導入慣性波動方程式，從干涉場中湧現同性排斥、異性吸引與自旋效應。 | ✅ 已完成 |
+| **第六階段** | **動態質心追蹤**：開發波包質心演算法，測量干涉場推擠下的粒子真實加速度，重現牛頓第二定律。 | 🔶 進行中 |
+| **第七階段** | **高階引力輻射**：引入雙星互繞系統，目標從晶格應變中提取「連續四極矩重力波」波形。 | 📋 規劃中 |
+| **第八階段** | **宇宙學極限**：探討有限邊界對宇宙加速膨脹的貢獻，以及非線性彈性推擠對愛因斯坦場方程的收斂。 | 📋 規劃中 |
 
-> **註**：關於量子力學湧現（原第七階段），目前鑑於「晶格化」是表現交互作用的數值極限，我們對直接湧現薛丁格方程持保留態度，轉而聚焦於更具備模擬可行性的**彈性介質與廣義相對論幾何極限**。
-
+> **註**：關於量子力學湧現，目前鑑於「晶格化」是表現交互作用的數值極限，我們對直接湧現薛丁格方程持保留態度，轉而聚焦於更具備模擬可行性的**經典場論波動干涉與廣義相對論幾何極限**。
 
 ---
 
@@ -135,7 +139,7 @@ For a static cluster, the depth of the dip (radius) is linearly related to the s
 
 這是一個業餘且開放的科學探索專案。無論你是物理學家、數學家、程式設計師或單純的愛好者，我們都非常需要你的幫助來「找碴」與推進：
 
-* **數學審閱**：審查 [`doc/gravity2/`](https://www.google.com/search?q=doc/gravity2/) 中的解析推導，尋找邏輯漏洞或可改進的數學表述。
+* **數學審閱**：審查 [`doc/gravity2/`](https://www.google.com/search?q=%5Bhttps://www.google.com/search%3Fq%3Ddoc/gravity2/%5D(https://www.google.com/search%3Fq%3Ddoc/gravity2/)) 中的解析推導，尋找邏輯漏洞或可改進的數學表述。
 * **演算法優化**：目前的 3D CUDA 模擬極度吃重 GPU 記憶體頻寬，歡迎提供更高效的 FDTD 或格子波茲曼（LBM）優化方案。
 * **推導連續極限**：協助從離散的非線性推擠規則出發，用粗粒化方法推導並證明其收斂於愛因斯坦真空場方程。
 * **文獻對比**：找出與「彈性網絡湧現引力」、「類比引力 (Analogue Gravity)」相關的學術論文進行對比與整理。
@@ -160,11 +164,12 @@ For a static cluster, the depth of the dip (radius) is linearly related to the s
 
 我們不追求先佔先贏，只追求 **找到宇宙真正的底層規則**。
 
-1. 閱讀 **完整理論推導**：[`doc/gravity2/`](https://www.google.com/search?q=doc/gravity2/)
-2. 閱讀 **星光偏折實驗報告**：[`Starlight_deflection/Starlight_deflection.md`](https://www.google.com/search?q=Starlight_deflection/Starlight_deflection.md)
-3. 執行 **星光偏折 GPU 模擬**：`python Starlight_deflection/einstein_gravity_lens.py`（需 NVIDIA GPU + CuPy）
-4. 執行 **黑洞時空彎曲模擬**：`python visualize_spacetime.py`
-5. 執行 **三大相對論基石實驗**：進入 `doc/light/` 執行相關腳本。
+1. 閱讀 **完整理論推導**：[`doc/gravity2/`](https://www.google.com/search?q=%5Bhttps://www.google.com/search%3Fq%3Ddoc/gravity2/%5D(https://www.google.com/search%3Fq%3Ddoc/gravity2/))
+2. 閱讀 **星光偏折實驗報告**：[`doc/Starlight_deflection/Starlight_deflection.md`](https://www.google.com/search?q=%5Bhttps://www.google.com/search%3Fq%3DStarlight_deflection/Starlight_deflection.md%5D(https://www.google.com/search%3Fq%3DStarlight_deflection/Starlight_deflection.md))
+3. 執行 **微觀粒子波動干涉模擬**：`python particle/gui_particle_sim.py`（啟動 GUI 實驗室）
+4. 執行 **星光偏折 GPU 模擬**：`python Starlight_deflection/einstein_gravity_lens.py`（需 NVIDIA GPU + CuPy）
+5. 執行 **黑洞時空彎曲模擬**：`python visualize_spacetime.py`
+6. 執行 **三大相對論基石實驗**：進入 `doc/light/` 執行相關腳本。
 
 ---
 
