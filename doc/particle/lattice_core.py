@@ -5,14 +5,15 @@ class EnergyLatticeSim3D:
         self.S = size
         self.mid = size // 2
         
-        # --- 🔴 核心升級 1：導入時間維度，支撐波動力學與慣性 ---
-        # u 代表當前狀態 t，u_prev 代表上一時刻 t-1
         self.u = cp.zeros((3, size, size, size), dtype=cp.float32)
         self.u_prev = cp.zeros((3, size, size, size), dtype=cp.float32)
         
-        # 波速的平方 (相當於 c^2，決定波的傳播與彈性介質的剛性)
         self.alpha = 0.08
         self.set_mode(mode)
+        
+        # 🔴 新增：靜態鎖定遮罩與對應的幾何場 (用於維持黑洞)
+        self.lock_mask = cp.zeros((1, size, size, size), dtype=bool)
+        self.lock_field = cp.zeros((3, size, size, size), dtype=cp.float32)
 
     def set_mode(self, mode):
         if mode == "micro":
@@ -78,12 +79,63 @@ class EnergyLatticeSim3D:
         
         self.inject_particle(pos, mass, charge, spin_vector, radius=5.0)
 
+    def inject_black_hole(self, pos, mass, charge, radius=10.0):
+        """
+        🌌 黑洞生成器：生成一個永久鎖定的極端拓撲缺陷
+        """
+        z, y, x = cp.ogrid[:self.S, :self.S, :self.S]
+        dz, dy, dx = z - pos[0], y - pos[1], x - pos[2]
+        dist = cp.sqrt(dx**2 + dy**2 + dz**2)
+        dist_safe = cp.maximum(dist, 1e-5) 
+        
+        # 定義事件視界 (黑洞半徑)
+        mask = (dist <= radius)
+        mask_4d = mask[cp.newaxis, :, :, :]
+        
+        # 🛠️ 修正點：提早除以 dist_safe，強制觸發廣播展開為 (S, S, S)
+        dir_x = dx / dist_safe
+        dir_y = dy / dist_safe
+        dir_z = dz / dist_safe
+        radial_field = cp.stack([dir_x, dir_y, dir_z], axis=0)
+        
+        # 計算極端質量與電荷場
+        # 黑洞內部的位移強度極大
+        mass_field = mass * radial_field * (1.0 / dist_safe)
+        charge_field = charge * radial_field * (1.0 / dist_safe)
+        
+        extreme_perturbation = (mass_field + charge_field) * mask_4d
+        
+        # 🔴 將此區域「永久鎖定」
+        self.lock_mask = self.lock_mask | mask_4d
+        # 若有多個黑洞，這裡直接疊加鎖定場
+        self.lock_field += extreme_perturbation
+        
+        # 初始狀態同步
+        self.u = cp.where(self.lock_mask, self.lock_field, self.u)
+        self.u_prev = self.u.copy()
+        
+        print(f"🕳️ 極端黑洞生成！ | 質量: {mass} | 電荷: {charge} | 視界半徑: {radius}")
+
     def step(self):
         """
-        --- 🔴 核心升級 3：真正的波動力學 ---
-        使用離散波動方程式： u(t+1) = 2u(t) - u(t-1) + c^2 ∇² u
-        讓粒子交互作用具備「慣性」與「波動傳遞」特性
+        🔴 升級 4：加入「吸收邊界 (Absorbing Boundary)」
+        防止宇宙邊緣的波反射回來摧毀中央的粒子
         """
+        # 如果還沒建立阻尼遮罩，就初始化一個
+        if not hasattr(self, 'damping_mask'):
+            self.damping_mask = cp.ones((self.S, self.S, self.S), dtype=cp.float32)
+            margin = 15 # 宇宙最外圍 15 格為「吸收層」
+            
+            z, y, x = cp.ogrid[:self.S, :self.S, :self.S]
+            # 找出邊緣區域
+            mask_edge = (x < margin) | (x >= self.S - margin) | \
+                        (y < margin) | (y >= self.S - margin) | \
+                        (z < margin) | (z >= self.S - margin)
+            
+            # 在邊緣區域乘上衰減係數 (0.95)，把飛出去的波吃掉
+            self.damping_mask[mask_edge] = 0.95
+
+        # 演化下一時刻的波
         u_next = cp.zeros_like(self.u)
         
         for i in range(3):
@@ -97,6 +149,9 @@ class EnergyLatticeSim3D:
             # 波動方程式演化
             u_next[i] = 2.0 * u_comp - self.u_prev[i] + self.alpha * laplacian
             
-        # 更新時間步 (時間往前推移)
+            # 🔴 套用邊界阻尼，吸收向外輻射的廢熱
+            u_next[i] *= self.damping_mask
+            
+        # 更新時間步
         self.u_prev = self.u.copy()
         self.u = u_next
