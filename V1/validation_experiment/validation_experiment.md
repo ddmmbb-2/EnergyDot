@@ -10,22 +10,23 @@
 
 在 EnergyDot 晶格宇宙中，空間是由緊密排列的彈性小點點（3D 彈性晶格）構成。一個具有質量的粒子（或黑洞）並非傳統物理學中的「無限小奇點」，而是晶格中一個排開空間的**拓撲空洞（Topological Void）**，其半徑為 $R$。
 
-當我們向晶格注入一個推擠位移場 $ec{u}$ 時，根據引擎實作，其場強大小在外部空間呈現與距離成反比的衰減：
-$$ec{u} \propto rac{m}{r} \hat{r}$$
+當我們向晶格注入一個推擠位移場 $\vec{u}$ 時，根據引擎實作，其場強大小在外部空間呈現與距離成反比的衰減：
 
-整個晶格宇宙因為這個拓撲缺陷而儲存的**總彈性應變能（Total Elastic Strain Energy, $E_{	ext{strain}}$）**，正比於形變梯度（應變張量）在全空間的積分。由於 $
-abla ec{u} \propto rac{m}{r^2}$，我們對拓撲空洞外部空間（$r \ge R$）進行體積分：
+$$\vec{u} \propto \frac{m}{r} \hat{r}$$
 
-$$E_{	ext{strain}} \propto \int_{R}^{\infty} |
-abla ec{u}|^2 dV = \int_{R}^{\infty} \left( rac{m}{r^2} ight)^2 4\pi r^2 dr$$
+整個晶格宇宙因為這個拓撲缺陷而儲存的**總彈性應變能（Total Elastic Strain Energy, $E_{\text{strain}}$）**，正比於形變梯度（應變張量）在全空間的積分。由於 $\nabla \vec{u} \propto \frac{m}{r^2}$，我們對拓撲空洞外部空間（$r \ge R$）進行體積分：
 
-$$E_{	ext{strain}} \propto 4\pi m^2 \int_{R}^{\infty} rac{1}{r^2} dr = rac{4\pi m^2}{R}$$
+$$E_{\text{strain}} \propto \int_{R}^{\infty} |\nabla \vec{u}|^2 dV = \int_{R}^{\infty} \left( \frac{m}{r^2} \right)^2 4\pi r^2 dr$$
+
+$$E_{\text{strain}} \propto 4\pi m^2 \int_{R}^{\infty} \frac{1}{r^2} dr = \frac{4\pi m^2}{R}$$
 
 因此，理論預測晶格總能量應滿足：
-$$E_{	ext{strain}} \propto rac{m^2}{R}$$
+
+$$E_{\text{strain}} \propto \frac{m^2}{R}$$
 
 若堅持第一性原理，粒子的靜止能量即為其湧現的慣性質量（等價於 $E = mc^2$，此處將光速 $c$ 設為自然單位常數），則將兩者等價：
-$$m \propto rac{m^2}{R} \implies 1 \propto rac{m}{R} \implies m \propto R$$
+
+$$m \propto \frac{m^2}{R} \implies 1 \propto \frac{m}{R} \implies m \propto R$$
 
 這項極為優雅的幾何推導指出：**粒子的慣性質量與其拓撲空洞半徑成正比**。以下為模擬實驗對此公式的動態驗證。
 
@@ -33,12 +34,11 @@ $$m \propto rac{m^2}{R} \implies 1 \propto rac{m}{R} \implies m \propto R$$
 
 ## 🧪 實驗設計與方法
 
-實驗腳本 `validation_experiment.py` 在 $96 	imes 96 	imes 96$ 的 3D 真空晶格中，於中心點注入不同參數組合的拓撲缺陷：
+實驗腳本 `validation_experiment.py` 在 $96 \times 96 \times 96$ 的 3D 真空晶格中，於中心點注入不同參數組合的拓撲缺陷：
 * **質量參數掃描 ($m$)**：`[10.0, 20.0, 30.0, 40.0, 50.0]`
 * **半徑參數掃描 ($R$)**：`[2.0, 4.0, 6.0, 8.0, 10.0]`
 
-每次注入缺陷後，利用 CuPy 計算全空間三個軸向的位移場梯度平方和 $\sum (
-abla ec{u})^2$，精確量化晶格所儲存的總彈性應變能 $E$，並自動將數據匯出至 `energydot_validation_results.csv`。
+每次注入缺陷後，利用 CuPy 計算全空間三個軸向的位移場梯度平方和 $\sum (\nabla \vec{u})^2$，精確量化晶格所儲存的總彈性應變能 $E$，並自動將數據匯出至 `energydot_validation_results.csv`。
 
 ---
 
@@ -50,7 +50,7 @@ abla ec{u})^2$，精確量化晶格所儲存的總彈性應變能 $E$，並自�
 ![Strain Energy vs Mass](energy_vs_mass.png)
 
 ### 2. 能量與空洞半徑的反比關係 ($E \propto 1/R$)
-當我們固定質量強度（下圖以固定 $m=30.0$ 為例），並觀察不同大小的拓撲空洞半徑 $R$ 時，將 X 軸設為倒數 $1/R$，數據點排列成一條完美的斜直線。這說明空洞半徑越大，晶格在外圍被「撐開」的緊繃感越被稀釋，能量與半徑成嚴格的反比關係。
+當我們固定質量強度（下圖以固定 $m=30.0$ 為例），並觀察不同大小的拓撲空洞半徑 $R$時，將 X 軸設為倒數 $1/R$，數據點排列成一條完美的斜直線。這說明空洞半徑越大，晶格在外圍被「撐開」的緊繃感越被稀釋，能量與半徑成嚴格的反比關係。
 
 ![Strain Energy vs 1/Radius](energy_vs_radius.png)
 
@@ -60,7 +60,7 @@ abla ec{u})^2$，精確量化晶格所儲存的總彈性應變能 $E$，並自�
 ![Actual Strain Energy vs Theoretical](energy_vs_theory.png)
 
 模擬數據的線性擬合結果為：
-* **斜率 (Slope)**: `~33.65` (由晶格常數與彈性係數 $lpha$ 決定的巨觀幾何常數)
+* **斜率 (Slope)**: `~33.65` (由晶格常數與彈性係數 $\alpha$ 決定的巨觀幾何常數)
 * **相關性**: 完美線性擬合，無發散奇點。
 
 ---
@@ -68,15 +68,15 @@ abla ec{u})^2$，精確量化晶格所儲存的總彈性應變能 $E$，並自�
 ## 🏆 核心物理結論
 
 本實驗成功重現並實證了 **EnergyDot** 的核心世界觀：
-1. **消滅奇點（Singularity Avoidance）**：由於離散晶格存在最小截斷半徑（Cutoff Radius），當 $r 	o 0$ 時引力場與能量不會發散至無限大，奇點在晶格框架下被自然消滅。
+1. **消滅奇點（Singularity Avoidance）**：由於離散晶格存在最小截斷半徑（Cutoff Radius），當 $r \to 0$ 時引力場與能量不會發散至無限大，奇點在晶格框架下被自然消滅。
 2. **質量的拓撲本質（Mass Emergence）**：數據嚴格支持 $E \propto m^2/R$。當我們要求粒子在宇宙中穩定存在並滿足形變能量即為慣性質量（$E = m$）時，公式自發化簡為 **$m \propto R$**。
-3. **幾何大一統**：物質（質量）不需要外加的唯象參數，它只是空間晶格被「撐開」後鎖定的幾何幾何缺陷，萬有引力則是兩個空洞互相同步排開晶格時產生的干涉壓強差。
+3. **幾何大一統**：物質（質量）不需要外加的唯象參數，它只是空間晶格被「撐開」後鎖定的幾何缺陷，萬有引力則是兩個空洞互相同步排開晶格時產生的干涉壓強差。
 
 ---
 
 ## 🚀 下一步開發計畫
 
 目前引擎使用的是靜態邊界鎖定遮罩（`lock_mask`）來維持缺陷。為了達成真正的**波粒二象性**與動態湧現，下一步我們將：
-1. **實作 Sine-Gordon 非線性項**：將孤子非線性束縛 $eta \sin(u)$ 整合進 `step()` 的演化方程式中。
+1. **實作 Sine-Gordon 非線性項**：將孤子非線性束縛 $\beta \sin(u)$ 整合進 `step()` 的演化方程式中。
 2. **動態脫離鎖定**：移除 `lock_mask`，讓這個具有幾何形狀的拓撲缺陷轉化為能在空間中自由飛行的「動態孤子波包」。
 3. **碰撞干涉實驗**：模擬兩個拓撲孤子的對撞，觀察是否會自發湧現出非彈性散射、動量守恆以及能量破碎波動。
