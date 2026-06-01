@@ -59,7 +59,7 @@ Imagine the universe is filled with tiny "energy dots" undergoing zero-point vib
 
 ## 🗺️ 路線圖 (Roadmap)
 
-* [x] **階段一**：$m \propto R$ 線性關係驗證。
+* [x] **階段一**： $m \propto R$  線性關係驗證。
 * [x] **階段二**：V8.4.0 CUDA/CuPy 引擎開發與算子對齊。
 * [ ] **階段三**：解決 Derrick's Theorem 導致的拓撲衰變，實現穩定孤子（Soliton）。
 * [ ] **階段四**：電磁與引力的純幾何統一（Micropolar Elasticity）。
